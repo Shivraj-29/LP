@@ -1,0 +1,32 @@
+import java.util.Scanner;
+
+public class Airline {
+
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Cargo Weight: ");
+        int weight = sc.nextInt();
+
+        System.out.print("Weather (1-Good 2-Bad): ");
+        int weather = sc.nextInt();
+
+        System.out.print("Priority (1-Normal 2-High): ");
+        int priority = sc.nextInt();
+
+        if(weather == 2)
+            System.out.println("Flight Delayed");
+
+        else if(weight > 5000)
+            System.out.println("Use Cargo Aircraft");
+
+        else if(priority == 2)
+            System.out.println("Priority Flight Approved");
+
+        else
+            System.out.println("Flight Scheduled");
+
+        sc.close();
+    }
+}

@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class DijkstraAlgorithm {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        // Input number of vertices
+        System.out.print("Enter number of vertices: ");
+        int V = sc.nextInt();
+        int[][] graph = new int[V][V];
+        // Input adjacency matrix
+        System.out.println("Enter adjacency matrix:");
+        for (int i = 0; i < V; i++) {
+            for (int j = 0; j < V; j++) {
+                graph[i][j] = sc.nextInt();
+            }
+        }
+        // Input source vertex
+        System.out.print("Enter source vertex: ");
+        int source = sc.nextInt();
+        int[] distance = new int[V];
+        boolean[] visited = new boolean[V];
+        // Initialize arrays (using 999 as infinity as per your C++ code)
+        for (int i = 0; i < V; i++) {
+            distance[i] = 999;
+            visited[i] = false;
+        }
+        distance[source] = 0;
+        // Dijkstra Algorithm
+        for (int count = 0; count < V; count++) {
+            int min = 999;
+            int u = -1; // Initialized to -1 to prevent uninitialized variable errors in Java
+            // Find minimum distance vertex
+            for (int i = 0; i < V; i++) {
+                if (!visited[i] && distance[i] < min) {
+                    min = distance[i];
+                    u = i;
+                }
+            }
+            // If a valid unvisited vertex with a distance less than 999 is found
+            if (u != -1) {
+                visited[u] = true;
+                // Update distances
+                for (int v = 0; v < V; v++) {
+                    if (graph[u][v] != 0 && 
+                        !visited[v] && 
+                        distance[u] + graph[u][v] < distance[v]) {
+                        
+                        distance[v] = distance[u] + graph[u][v];
+                    }
+                }
+            }
+        }
+        // Print shortest distances
+        System.out.println("\nShortest Distances from Vertex " + source + ":");
+        for (int i = 0; i < V; i++) {
+            System.out.println("Vertex " + i + " = " + distance[i]);
+        }
+
+        sc.close();
+    }
+}

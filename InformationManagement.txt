@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+public class InformationManagement {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n--- Information Management Expert System ---");
+            System.out.println("1. Department Information");
+            System.out.println("2. Course Information");
+            System.out.println("3. Staff Information");
+            System.out.println("4. Library Information");
+            System.out.println("5. Exit");
+
+            System.out.print("Enter choice: ");
+            choice = sc.nextInt();
+
+            switch(choice) {
+
+                case 1:
+                    System.out.println("\nDepartment Information:");
+                    System.out.println("Computer Department");
+                    System.out.println("HOD: Dr. ABC");
+                    System.out.println("Labs: Programming, AI, Network");
+                    break;
+
+                case 2:
+                    System.out.println("\nCourse Information:");
+                    System.out.println("Course: Artificial Intelligence");
+                    System.out.println("Duration: 1 Semester");
+                    System.out.println("Credits: 4");
+                    break;
+
+                case 3:
+                    System.out.println("\nStaff Information:");
+                    System.out.println("Professor: John Smith");
+                    System.out.println("Subject: Data Structures");
+                    break;
+
+                case 4:
+                    System.out.println("\nLibrary Information:");
+                    System.out.println("Open: 9 AM to 6 PM");
+                    System.out.println("Books Available: 5000+");
+                    break;
+
+                case 5:
+                    System.out.println("Exiting System...");
+                    break;
+
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+
+        } while(choice != 5);
+
+        sc.close();
+    }
+}

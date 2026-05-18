@@ -1,0 +1,63 @@
+import java.util.Scanner;
+
+public class HelpDeskExpertSystem {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        int choice;
+
+        do {
+            System.out.println("\n--- Help Desk Expert System ---");
+            System.out.println("1. Internet Issue");
+            System.out.println("2. Computer Not Starting");
+            System.out.println("3. Printer Problem");
+            System.out.println("4. Password Reset");
+            System.out.println("5. Exit");
+
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch(choice) {
+
+                case 1:
+                    System.out.println("\nExpert Advice:");
+                    System.out.println("- Check Wi-Fi connection.");
+                    System.out.println("- Restart router.");
+                    System.out.println("- Verify network cables.");
+                    break;
+
+                case 2:
+                    System.out.println("\nExpert Advice:");
+                    System.out.println("- Check power supply.");
+                    System.out.println("- Verify battery/charger.");
+                    System.out.println("- Restart system.");
+                    break;
+
+                case 3:
+                    System.out.println("\nExpert Advice:");
+                    System.out.println("- Check printer connection.");
+                    System.out.println("- Refill paper/ink.");
+                    System.out.println("- Reinstall printer drivers.");
+                    break;
+
+                case 4:
+                    System.out.println("\nExpert Advice:");
+                    System.out.println("- Click 'Forgot Password'.");
+                    System.out.println("- Verify email/OTP.");
+                    System.out.println("- Create a new password.");
+                    break;
+
+                case 5:
+                    System.out.println("Exiting Help Desk System...");
+                    break;
+
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+
+        } while(choice != 5);
+
+        sc.close();
+    }
+}

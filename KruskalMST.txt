@@ -1,0 +1,78 @@
+import java.util.Arrays;
+import java.util.Scanner;
+
+public class SimpleKruskalWithInput {
+    
+    // Simple find function to trace the root leader node of a cluster
+    public static int find(int[] parent, int i) {
+        if (parent[i] == i) {
+            return i;
+        }
+        return find(parent, parent[i]);
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // 1. Input number of vertices and edges
+        System.out.print("Enter number of vertices (V): ");
+        int V = sc.nextInt();
+        
+        System.out.print("Enter total number of edges: ");
+        int E = sc.nextInt();
+
+        // 2D Array represents edges: {Source, Destination, Weight}
+        int[][] edges = new int[E][3];
+
+        // 2. Input edge details
+        System.out.println("Enter edges details (Source Destination Weight) for each edge:");
+        for (int i = 0; i < E; i++) {
+            System.out.print("Edge " + (i + 1) + ": ");
+            edges[i][0] = sc.nextInt(); // Source
+            edges[i][1] = sc.nextInt(); // Destination
+            edges[i][2] = sc.nextInt(); // Weight
+        }
+
+        // 3. Sort edges by weight in ascending order using an inline lambda expression
+        Arrays.sort(edges, (a, b) -> a[2] - b[2]);
+
+        // 4. Initialize Parent Array for Disjoint Set
+        int[] parent = new int[V];
+        for (int i = 0; i < V; i++) {
+            parent[i] = i;
+        }
+
+        System.out.println("\nMinimum Spanning Tree (MST):");
+        int edgesCount = 0;
+        int totalMstWeight = 0;
+
+        // 5. Process each sorted edge
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+            int weight = edge[2];
+
+            int x = find(parent, u);
+            int y = find(parent, v);
+
+            // Cycle Prevention
+            if (x != y) {
+                System.out.println(u + " -- " + v + " = " + weight);
+                
+                // Union Operation
+                parent[x] = y; 
+                
+                totalMstWeight += weight;
+                edgesCount++;
+                
+                // Stop once we collect V - 1 edges
+                if (edgesCount == V - 1) {
+                    break;
+                }
+            }
+        }
+        
+        System.out.println("Total Weight of MST: " + totalMstWeight);
+        sc.close();
+    }
+}

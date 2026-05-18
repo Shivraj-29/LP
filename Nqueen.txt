@@ -1,0 +1,97 @@
+import java.util.Scanner;
+
+public class nquns {
+
+    static int N;
+    static int board[][];
+
+    // Function to check whether queen can be placed safely
+    static boolean isSafe(int row, int col) {
+
+        // Check same column
+        for (int i = 0; i < row; i++) {
+            if (board[i][col] == 1)
+                return false;
+        }
+
+        // Check upper left diagonal
+        for (int i = row, j = col; i >= 0 && j >= 0; i--, j--) {
+            if (board[i][j] == 1)
+                return false;
+        }
+
+        // Check upper right diagonal
+        for (int i = row, j = col; i >= 0 && j < N; i--, j++) {
+            if (board[i][j] == 1)
+                return false;
+        }
+
+        // Position is safe
+        return true;
+    }
+
+    // Recursive function using backtracking
+    static boolean solve(int row) {
+
+        // All queens are placed
+        if (row >= N)
+            return true;
+
+        // Try placing queen in every column
+        for (int col = 0; col < N; col++) {
+
+            // Check safe position
+            if (isSafe(row, col)) {
+
+                // Place queen
+                board[row][col] = 1;
+
+                // Recursive call for next row
+                if (solve(row + 1))
+                    return true;
+
+                // Backtracking: remove queen
+                board[row][col] = 0;
+            }
+        }
+
+        // No valid position found
+        return false;
+    }
+
+    // Function to print chessboard
+    static void printBoard() {
+
+        System.out.println("\nSolution Board:\n");
+
+        for (int i = 0; i < N; i++) {
+
+            for (int j = 0; j < N; j++) {
+                System.out.print(board[i][j] + " ");
+            }
+
+            System.out.println();
+        }
+    }
+
+    // Main function
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input board size
+        System.out.print("Enter value of N: ");
+        N = sc.nextInt();
+
+        // Create NxN board
+        board = new int[N][N];
+
+        // Solve N-Queens problem
+        if (solve(0))
+            printBoard();
+        else
+            System.out.println("No Solution Exists");
+
+        sc.close();
+    }
+}

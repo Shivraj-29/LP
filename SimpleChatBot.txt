@@ -1,0 +1,57 @@
+import java.util.Scanner;
+
+public class SimpleChatBot {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        String message;
+
+        System.out.println("Customer Care ChatBot");
+        System.out.println("Type 'bye' to exit");
+
+        while (true) {
+
+            System.out.print("\nYou: ");
+            message = sc.nextLine();
+
+            // Greeting
+            if (message.equalsIgnoreCase("hello")) {
+
+                System.out.println("Bot: Hello! Welcome to our service.");
+
+            }
+
+            // Product Query
+            else if (message.equalsIgnoreCase("product")) {
+
+                System.out.println("Bot: We sell laptops and mobiles.");
+
+            }
+
+            // Price Query
+            else if (message.equalsIgnoreCase("price")) {
+
+                System.out.println("Bot: Prices start from Rs.10000.");
+
+            }
+
+            // Exit
+            else if (message.equalsIgnoreCase("bye")) {
+
+                System.out.println("Bot: Thank you! Visit again.");
+                break;
+
+            }
+
+            // Unknown Message
+            else {
+
+                System.out.println("Bot: Sorry, I don't understand.");
+            }
+        }
+
+        sc.close();
+    }
+}

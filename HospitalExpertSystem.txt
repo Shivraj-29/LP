@@ -1,0 +1,72 @@
+import java.util.Scanner;
+
+public class HospitalExpertSystem {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int choice;
+
+        do {
+            System.out.println("\n=== Hospital & Medical Expert System ===");
+            System.out.println("1. Fever");
+            System.out.println("2. Cough / Cold");
+            System.out.println("3. Headache");
+            System.out.println("4. Stomach Pain");
+            System.out.println("5. Emergency");
+            System.out.println("6. Exit");
+
+            System.out.print("Enter your choice: ");
+            choice = sc.nextInt();
+
+            switch(choice) {
+
+                case 1:
+                    System.out.println("\nMedical Advice:");
+                    System.out.println("- Drink plenty of water");
+                    System.out.println("- Take proper rest");
+                    System.out.println("- Visit a physician if fever persists");
+                    break;
+
+                case 2:
+                    System.out.println("\nMedical Advice:");
+                    System.out.println("- Drink warm fluids");
+                    System.out.println("- Take steam inhalation");
+                    System.out.println("- Consult doctor if symptoms worsen");
+                    break;
+
+                case 3:
+                    System.out.println("\nMedical Advice:");
+                    System.out.println("- Take rest");
+                    System.out.println("- Avoid screen exposure");
+                    System.out.println("- Consult doctor if severe");
+                    break;
+
+                case 4:
+                    System.out.println("\nMedical Advice:");
+                    System.out.println("- Avoid oily food");
+                    System.out.println("- Drink enough water");
+                    System.out.println("- Visit hospital if pain continues");
+                    break;
+
+                case 5:
+                    System.out.println("\nEmergency Services:");
+                    System.out.println("- Call ambulance immediately");
+                    System.out.println("- Contact nearest hospital");
+                    System.out.println("- Dial emergency number");
+                    break;
+ 
+                case 6:
+                    System.out.println("Exiting System...");
+                    break;
+
+                default:
+                    System.out.println("Invalid Choice!");
+            }
+
+        } while(choice != 6);
+
+        sc.close();
+    }
+}

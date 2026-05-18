@@ -1,0 +1,56 @@
+import java.util.Scanner;
+
+public class StockMarketExpertSystem {
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int trend, risk, amount;
+
+        System.out.println("=== Stock Market Trading Expert System ===");
+
+        System.out.println("Market Trend:");
+        System.out.println("1. Upward");
+        System.out.println("2. Stable");
+        System.out.println("3. Downward");
+
+        System.out.print("Enter choice: ");
+        trend = sc.nextInt();
+
+        System.out.print("Enter Risk Level (1-Low, 2-Medium, 3-High): ");
+        risk = sc.nextInt();
+
+        System.out.print("Enter Investment Amount: ");
+        amount = sc.nextInt();
+
+        System.out.println("\nExpert Suggestion:");
+
+        // Rule-based expert system
+        if(trend == 1 && risk == 3 && amount > 50000) {
+            System.out.println("Decision: BUY");
+            System.out.println("Reason: High risk with upward trend.");
+        }
+
+        else if(trend == 1 && risk >= 2) {
+            System.out.println("Decision: HOLD");
+            System.out.println("Reason: Market positive but monitor movement.");
+        }
+
+        else if(trend == 2) {
+            System.out.println("Decision: HOLD");
+            System.out.println("Reason: Market is stable.");
+        }
+
+        else if(trend == 3) {
+            System.out.println("Decision: SELL");
+            System.out.println("Reason: Downward trend detected.");
+        }
+
+        else {
+            System.out.println("Decision: Consult financial advisor.");
+        }
+
+        sc.close();
+    }
+}

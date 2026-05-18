@@ -1,0 +1,141 @@
+public class PrimMST {
+
+    public static void primMST(int[][] graph) {
+        int n = graph.length;
+        boolean[] selected = new boolean[n];
+        selected[0] = true; // start from node 0
+        System.out.println("Edge : Weight");
+        for (int step = 0; step < n - 1; step++) {
+            int minVal = Integer.MAX_VALUE;
+            int x = 0;
+            int y = 0;
+            for (int i = 0; i < n; i++) {
+                if (selected[i]) {
+                    for (int j = 0; j < n; j++) {
+                        if (!selected[j] && graph[i][j] != 0) {
+                            if (graph[i][j] < minVal) {
+                                minVal = graph[i][j];
+                                x = i;
+                                y = j;
+                            }
+                        }
+                    }
+                }
+            }
+            System.out.println(x + " - " + y + " : " + graph[x][y]);
+            selected[y] = true;
+        }
+    }
+
+    public static void main(String[] args) {
+        // Your graph from the matrix
+        int[][] graph = {
+            {0, 4, 6, 0},
+            {4, 0, 5, 3},
+            {6, 5, 0, 2},
+            {0, 3, 2, 0}
+        };
+        primMST(graph);
+    }
+}
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------
+
+
+
+
+
+import java.util.Scanner;
+
+public class PrimMST {
+
+    // Function for Prim's Algorithm
+    public static void primMST(int[][] graph) {
+
+        int n = graph.length;
+
+        // Track selected vertices
+        boolean[] selected = new boolean[n];
+
+        // Start from vertex 0
+        selected[0] = true;
+
+        int totalCost = 0;
+
+        System.out.println("\nEdge : Weight");
+
+        // MST contains n-1 edges
+        for (int step = 0; step < n - 1; step++) {
+
+            int minVal = Integer.MAX_VALUE;
+            int x = 0;
+            int y = 0;
+
+            // Find minimum edge
+            for (int i = 0; i < n; i++) {
+
+                if (selected[i]) {
+
+                    for (int j = 0; j < n; j++) {
+
+                        // Select edge only if:
+                        // 1. Vertex not selected
+                        // 2. Edge exists
+                        if (!selected[j] && graph[i][j] != 0) {
+
+                            if (graph[i][j] < minVal) {
+
+                                minVal = graph[i][j];
+                                x = i;
+                                y = j;
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Print selected edge
+            System.out.println(x + " - " + y + " : " + graph[x][y]);
+
+            // Add cost
+            totalCost += graph[x][y];
+
+            // Include new vertex in MST
+            selected[y] = true;
+        }
+
+        System.out.println("\nTotal Minimum Cost = " + totalCost);
+    }
+
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        // Input number of vertices
+        System.out.print("Enter number of vertices: ");
+        int n = sc.nextInt();
+
+        int[][] graph = new int[n][n];
+
+        // Input adjacency matrix
+        System.out.println("Enter adjacency matrix:");
+
+        for (int i = 0; i < n; i++) {
+
+            for (int j = 0; j < n; j++) {
+
+                graph[i][j] = sc.nextInt();
+            }
+        }
+
+        // Call Prim's Algorithm
+        primMST(graph);
+
+        sc.close();
+    }
+}
