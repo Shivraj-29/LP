@@ -1,0 +1,143 @@
+#include <iostream>
+#include <vector>
+#include <queue>
+#include <map>
+
+using namespace std;
+
+// Structure for node
+struct Node
+{
+    char vertex;
+    int g; // Cost from start node
+    int h; // Heuristic value
+
+    // Total cost function
+    int f() const
+    {
+        return g + h;
+    }
+};
+
+// Comparator for priority queue
+struct Compare
+{
+    bool operator()(Node a, Node b)
+    {
+        return a.f() > b.f();
+    }
+};
+
+// A* Algorithm Function
+void aStar(map<char, vector<pair<char, int>>> &graph,
+           map<char, int> &heuristic,
+           char start,
+           char goal)
+{
+    priority_queue<Node, vector<Node>, Compare> pq;
+
+    map<char, bool> visited;
+
+    // Push starting node
+    pq.push({start, 0, heuristic[start]});
+
+    cout << "\nPath Traversal: ";
+
+    while (!pq.empty())
+    {
+        Node current = pq.top();
+        pq.pop();
+
+        char vertex = current.vertex;
+
+        // Skip if already visited
+        if (visited[vertex])
+        {
+            continue;
+        }
+
+        visited[vertex] = true;
+
+        cout << vertex << " ";
+
+        // Goal found
+        if (vertex == goal)
+        {
+            cout << "\nGoal Node Reached";
+            cout << "\nTotal Cost = " << current.g << endl;
+            return;
+        }
+
+        // Visit neighbors
+        for (auto neighbor : graph[vertex])
+        {
+            char next = neighbor.first;
+            int cost = neighbor.second;
+
+            if (!visited[next])
+            {
+                pq.push({next,
+                         current.g + cost,
+                         heuristic[next]});
+            }
+        }
+    }
+
+    cout << "\nGoal Node Not Found";
+}
+
+// Main Function
+int main()
+{
+    int n;
+
+    cout << "Enter number of vertices: ";
+    cin >> n;
+
+    map<char, vector<pair<char, int>>> graph;
+    map<char, int> heuristic;
+
+    // Graph Input
+    for (int i = 0; i < n; i++)
+    {
+        char vertex;
+        int hValue;
+        int neighbors;
+
+        cout << "\nEnter vertex name: ";
+        cin >> vertex;
+
+        cout << "Enter heuristic value of " << vertex << ": ";
+        cin >> hValue;
+
+        heuristic[vertex] = hValue;
+
+        cout << "Enter number of neighbors of "
+             << vertex << ": ";
+        cin >> neighbors;
+
+        for (int j = 0; j < neighbors; j++)
+        {
+            char neighbor;
+            int cost;
+
+            cout << "Enter neighbor and cost: ";
+            cin >> neighbor >> cost;
+
+            graph[vertex].push_back({neighbor, cost});
+        }
+    }
+
+    char start, goal;
+
+    cout << "\nEnter Start Node: ";
+    cin >> start;
+
+    cout << "Enter Goal Node: ";
+    cin >> goal;
+
+    // Call A* Algorithm
+    aStar(graph, heuristic, start, goal);
+
+    return 0;
+}
